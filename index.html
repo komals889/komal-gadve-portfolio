@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Komal Gadve – Frontend Developer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#141414;--surface:#1f1f1f;--text:#f2f2f2;--muted:#a8a8a8;--red:#e50914;--line:#333;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141414}}
+:root[data-theme="dark"]{--bg:#141414}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;scrollbar-gutter:stable;overflow-x:clip}main,section.row{min-width:0;max-width:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 Inter,system-ui,sans-serif;overflow-x:hidden}
+.display{font-family:"Bebas Neue",Impact,sans-serif;letter-spacing:.02em;font-weight:400}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid #fff;outline-offset:2px}
+/* picker */
+#picker{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;padding:24px;text-align:center;transition:opacity .6s,transform .6s}
+#picker.out{opacity:0;transform:scale(1.8);pointer-events:none}
+#picker h1{font-size:clamp(2.4rem,6vw,3.6rem);margin:0;animation:rise .7s both}
+.profiles{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.profile{background:none;border:0;width:150px;color:var(--muted);animation:rise .6s both}
+.profile:nth-child(2){animation-delay:.12s}.profile:nth-child(3){animation-delay:.24s}.profile:nth-child(4){animation-delay:.36s}
+.profile .av{display:block;width:130px;height:130px;border-radius:6px;border:3px solid transparent;margin-bottom:10px;transition:transform .25s,border-color .25s}
+.profile:hover,.profile:focus-visible{color:#fff}.profile:hover .av,.profile:focus-visible .av{border-color:#fff;transform:scale(1.08)}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(14px + env(safe-area-inset-top,0px)) 4% 14px;display:flex;align-items:center;gap:28px;background:linear-gradient(#000c,transparent);transition:background .3s}
+nav.solid{background:var(--bg)}
+.logo{color:var(--red);font-size:2rem;line-height:1}
+nav a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}nav a:hover{color:#fff}
+.who{margin-left:auto;font-size:.85rem;color:var(--muted)}
+@media(max-width:700px){nav a.opt{display:none}nav{gap:16px;padding-left:5%;padding-right:5%}.who{display:none}.logo{font-size:1.6rem}}@media(max-width:520px){.stats{display:grid;grid-template-columns:1fr 1fr}.hero{padding-bottom:7vh}}footer{overflow-wrap:anywhere}
+/* hero */
+.hero{position:relative;min-height:92vh;min-height:92svh;display:flex;align-items:flex-end;padding:0 4% 10vh;overflow:hidden;background:#1a1a1a}
+.glow{position:absolute;inset:-20%;background:radial-gradient(circle at 75% 30%,#e5091466,transparent 38%),radial-gradient(circle at 55% 75%,#3a2fb866,transparent 42%),radial-gradient(circle at 90% 80%,#0a9d8f44,transparent 35%);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-4%,3%) scale(1.12) rotate(4deg)}}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 2%,transparent 55%),linear-gradient(90deg,#000d 0%,transparent 70%)}
+.hero-in{position:relative;z-index:2;max-width:680px; margin-top: 50px;}
+.hero h2{font-size:clamp(3.4rem,10vw,6.8rem);line-height:.92;margin:0 0 10px;animation:rise .9s .1s both}
+.type{font-size:1.25rem;font-weight:500;color:#fff;margin:0 0 14px;min-height:1.9em;animation:rise .9s .3s both}
+.type i{display:inline-block;width:2px;height:1.1em;background:var(--red);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.sum{color:#ddd;margin:0 0 24px;max-width:56ch;animation:rise .9s .5s both}
+.btns{display:flex;gap:12px;flex-wrap:wrap;animation:rise .9s .7s both}
+.btn{border:0;border-radius:4px;padding:11px 26px;font-weight:600;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{transform:scale(1.05)}
+.btn.play{background:#fff;color:#000}.btn.play:hover{background:#ddd}
+.btn.info{background:#6d6d6eb3;color:#fff}
+/* stats */
+.stats{display:flex;gap:clamp(18px,5vw,56px);flex-wrap:wrap;padding:6px 4% 34px;position:relative;z-index:2;margin-top:-5vh}
+.stat b{display:block;font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;color:var(--red)}
+.stat span{color:var(--muted);font-size:.85rem}
+/* rows */
+main{position:relative;z-index:2;padding-bottom:70px}
+section.row{margin:0 0 30px}
+.row h3{margin:0 4% 6px;font-size:1.25rem;font-weight:600}
+.track{display:flex;gap:8px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:14px 4% 34px;scroll-padding-inline:4%;scroll-snap-type:x proximity;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}.track:after{content:"";flex:0 0 1px}
+.track::-webkit-scrollbar{display:none}
+.card{flex:0 0 clamp(220px,24vw,310px);scroll-snap-align:start;background:var(--surface);border:0;border-radius:6px;padding:0;text-align:left;overflow:hidden;min-width:0;transition:transform .25s,box-shadow .25s}
+.row:not(.in) .card{opacity:0}.row.in .card{animation:slide .7s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i)*90ms)}
+@keyframes slide{from{opacity:0;transform:translateY(26px)}}
+.row.in .card:hover,.row.in .card:focus-visible{transform:scale(1.07);box-shadow:0 14px 34px #000a;z-index:3}
+.thumb{aspect-ratio:16/9;display:flex;align-items:flex-end;padding:12px;font-size:1.7rem;line-height:1;position:relative;overflow:hidden}
+.thumb:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff22 50%,transparent 65%);transform:translateX(-120%);transition:transform .7s}
+.card:hover .thumb:after{transform:translateX(120%)}
+.meta{padding:10px 12px 14px;font-size:.82rem;color:var(--muted)}
+.meta b{display:block;color:var(--text);font-size:.95rem;margin-bottom:2px}
+.match{color:#46d369;font-weight:600}
+.skill .thumb{aspect-ratio:3/2;font-size:2rem}
+/* modal */
+dialog{border:0;padding:0;border-radius:10px;background:var(--surface);color:var(--text);width:min(780px,94vw);max-height:90vh;overflow:auto}
+dialog[open]{animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:scale(.9) translateY(20px)}}
+dialog::backdrop{background:#000b}
+.m-top{aspect-ratio:16/7;display:flex;align-items:flex-end;padding:24px;font-size:clamp(2rem,6vw,3.2rem);line-height:1;position:relative}
+.m-top:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--surface),transparent 60%)}
+.m-top span{position:relative;z-index:1}
+.close{position:absolute;top:12px;right:12px;z-index:2;width:36px;height:36px;padding:0;border-radius:50%;border:0;background:#181818;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}.close:hover{background:#333;transform:rotate(90deg)}.close svg{width:14px;height:14px;display:block;pointer-events:none}
+.m-body{padding:4px 28px 28px}
+.m-body .tags{color:var(--muted);font-size:.85rem;margin-bottom:12px}
+.m-body ul{padding-left:20px;color:#ddd}.m-body li{margin:7px 0}#m-link{display:inline-block;margin-top:6px}#m-link[hidden]{display:none}
+/* contact */
+footer{padding:48px 4% 70px;border-top:1px solid var(--line);color:var(--muted);text-align:center}
+footer h3{color:var(--text);font-size:clamp(2.4rem,6vw,3.6rem);margin:0 0 8px}
+footer a{color:#fff}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.row .card{opacity:1!important;transform:none!important}.glow{animation:none}}
+</style>
+</head>
+<body>
+
+<div id="picker">
+  <h1 class="display">Who’s watching?</h1>
+  <div class="profiles">
+    <button class="profile" data-who="Recruiter"><span class="av" style="background:linear-gradient(135deg,#e50914,#7a0610)"></span>Recruiter</button>
+    <button class="profile" data-who="Hiring manager"><span class="av" style="background:linear-gradient(135deg,#3a2fb8,#14104a)"></span>Hiring manager</button>
+    <button class="profile" data-who="Fellow developer"><span class="av" style="background:linear-gradient(135deg,#0a9d8f,#064a44)"></span>Fellow developer</button>
+    <button class="profile" data-who="Guest"><span class="av" style="background:linear-gradient(135deg,#e8a100,#6b4a00)"></span>Guest</button>
+  </div>
+</div>
+
+<nav id="nav">
+  <span class="logo display">KOMAL GADVE</span>
+  <a href="#projects">Projects</a><a class="opt" href="#experience">Experience</a><a class="opt" href="#skills">Skills</a><a href="#contact">Contact</a>
+  <span class="who" id="who"></span>
+</nav>
+
+<header class="hero">
+  <div class="glow"></div>
+  <div class="hero-in">
+    <h2 class="display">Frontend developer for screens of every size</h2>
+    <p class="type"><span id="typed"></span><i></i></p>
+    <p class="sum">3 years building fast, accessible web and Smart TV apps with React.js, Vue.js, Next.js, and TypeScript, from music streaming to OTT platforms.</p>
+    <div class="btns">
+      <button class="btn play" data-open="p0">▶ Play featured project</button>
+      <a class="btn info" href="#contact">Hire me</a><a class="btn info" href="resume.pdf" download="Komal_Gadve_Resume.pdf">Download resume</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b data-to="3" data-suf="+">0</b><span>years of experience</span></div>
+  <div class="stat"><b data-to="5" data-suf="">0</b><span>OTT products shipped</span></div>
+  <div class="stat"><b data-to="30" data-suf="%">0</b><span>faster page loads</span></div>
+  <div class="stat"><b data-to="25" data-suf="%">0</b><span>higher engagement</span></div>
+</div>
+
+<main>
+  <section class="row" id="projects"><h3>Featured projects</h3><div class="track" data-row="projects"></div></section>
+  <section class="row" id="experience"><h3>Continue watching: my experience</h3><div class="track" data-row="experience"></div></section>
+  <section class="row" id="skills"><h3>Skills and tools</h3><div class="track skill" data-row="skills"></div></section>
+  <section class="row"><h3>Education and learning</h3><div class="track" data-row="edu"></div></section>
+</main>
+
+<footer id="contact">
+  <h3 class="display">Let’s build something together</h3>
+  <p>Open to Frontend Developer roles (React.js / Vue.js / Next.js).<br>
+  <a href="mailto:komalgadve.dev@gmail.com">komalgadve.dev@gmail.com</a><br>
+  <a href="https://linkedin.com/in/gadve-komal-b5693a1b4" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/komals889" target="_blank" rel="noopener">GitHub</a> · <a href="resume.pdf" download="Komal_Gadve_Resume.pdf">Download resume</a></p>
+</footer>
+
+<dialog id="modal" aria-labelledby="m-title">
+  <div class="m-top" id="m-top"><button class="close" aria-label="Close"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg></button><span class="display" id="m-title"></span></div>
+  <div class="m-body"><div class="tags" id="m-tags"></div><p id="m-desc"></p><ul id="m-list"></ul><a id="m-link" class="btn play" target="_blank" rel="noopener" hidden>Visit live site</a></div>
+</dialog>
+
+<script>
+const g=(a,b)=>`linear-gradient(135deg,${a},${b})`;
+const DATA={
+projects:[
+ {t:"KEE TV",tags:"Kerala regional OTT · B2B and B2C · Firestore",m:"Live product",u:"https://www.keeott.com/",c:g("#0a9d8f","#032420"),d:"OTT application for the Kerala region, built as two products: one for businesses (B2B) and one for viewers (B2C).",l:["Built the feature that opens third-party apps such as ZEE5, JioHotstar, and SonyLIV directly from the app","Delivered two products from the platform: B2B and B2C","Used Firestore to restore login after the TV is switched off, because turning the TV off was clearing local storage and signing users out","Result: viewers stay signed in across power cycles"]},
+ {t:"ORIMEDIA",tags:"Music streaming · React, Next.js, Firebase",m:"Music",u:"https://www.ori.mn//",c:g("#e50914","#3a0307"),d:"Complete frontend for a music streaming platform.",l:["Built continuous playback, search, and content discovery","Integrated REST APIs for dynamic content and Firebase for real-time likes, dislikes, and activity tracking","Secured access with Google OAuth 2.0 and JWT authorization","Stack: React.js, Next.js, Firebase, REST APIs, OAuth 2.0, JWT"]},
+ {t:"Streamnxt",tags:"Smart TV OTT · WebOS, TizenOS",m:"TV app", c:g("#3a2fb8","#0c0930"),d:"Smart TV apps for a multi-device OTT platform.",l:["Optimized UI performance for Smart TV hardware limits on WebOS and TizenOS","Designed an Electronic Program Guide (EPG) with preference-based content and smooth remote-control navigation","Added custom page scrolling across the channel and program grid"]},
+ {t:"Sainaplay",tags:"OTT video streaming app",m:"+30% engagement",u:"https://sainaplay.com/",c:g("#f5a623","#5a3400"),d:"High-performance OTT application.",l:["Lifted user engagement by 30% through UI/UX improvements and reduced buffering","Built a video shorts feature with like/dislike interactions, in the style of social media"]},
+ {t:"Ultraplay family",tags:"Ultraplay · Ultragaane · Ultrajhakaas",u:"https://www.ultrajhakaas.com/",m:"Regional OTT",c:g("#d6336c","#44091f"),d:"Multilingual OTT web apps for Marathi and Hindi series and movies.",l:["Increased visibility of regional content","Integrated multi-format streaming with cross-platform compatibility","Implemented next-video auto-play with scrubbing"]}],
+experience:[
+ {t:"Frontend Developer",tags:"Mobiotics IT Solution · Apr 2023 – Aug 2025",m:"Season 2",c:g("#e50914","#2a0206"),d:"Built web and Smart TV UIs for multiple OTT products.",l:["Shipped responsive, accessible UIs with React.js, Next.js, and Vue.js, raising engagement by about 25%","Built reusable component libraries that cut development time for new features","Managed state with Redux, Flux, Zustand, Vuex, and Pinia","Implemented Google OAuth 2.0 and JWT auth following OWASP practices against XSS and CSRF","Improved Core Web Vitals (LCP, FCP, TTI) and cut load times by up to 30%","Used GitHub Copilot, Cursor, and Claude AI, and checked all AI output for security, performance, and WCAG 2.1 AA","Used Firebase for real-time sync across Chrome, Firefox, Safari, WebOS, TizenOS, and VidaaOS","Reviewed code and mentored junior developers in agile sprints"]},
+ {t:"Full Stack Developer Intern",tags:"Mobiotics IT Solution · Oct 2022 – Apr 2023",m:"Season 1",c:g("#3a2fb8","#0c0930"),d:"Built full-stack features with JavaScript, React.js, and Node.js.",l:["Improved application performance and engagement by 20%","Cut system errors by 30% through testing, debugging, and root-cause analysis","Worked with cross-functional teams on deployment in agile cycles"]}],
+skills:[
+ {t:"Core frontend",tags:"React · Next.js · TypeScript",c:g("#e50914","#101010"),l:["JavaScript (ES6+), TypeScript","React.js (Hooks, Context API), Next.js, Vue.js (Vue 2, Vue 3, Composition API), Node.js","HTML5, CSS3, SPA / SSR / SSG, PWA, micro-frontends"]},
+ {t:"State and data",tags:"Redux · Zustand · REST",c:g("#3a2fb8","#101010"),l:["Redux, Flux, Zustand, Context API, Vuex, Pinia","REST APIs, JSON, AJAX, caching, SSO","Firebase real-time data"]},
+ {t:"Vue.js",tags:"Vue 2 · Vue 3 · Pinia",c:g("#42b883","#0f2f23"),d:"Vue is a core part of my toolkit alongside React, used to build reusable component libraries for OTT products.",l:["Vue 2 and Vue 3, with both Composition API and Options API","Single-File Components, reactivity system, directives, computed properties and watchers","Props and emits, lifecycle hooks","Vue Router, Vuex, Pinia, Vue CLI"]},
+ {t:"Styling",tags:"Tailwind · Sass · Responsive",c:g("#0a9d8f","#101010"),l:["Sass/SCSS, LESS, CSS Modules","Bootstrap, Tailwind CSS","Responsive and adaptive, cross-browser and cross-device UI"]},
+ {t:"Performance",tags:"Core Web Vitals",c:g("#f5a623","#101010"),l:["LCP, FCP, TTI","Code splitting, lazy loading, memoization","Bundle optimization and minification"]},
+ {t:"Security",tags:"OWASP · OAuth · JWT",c:g("#d6336c","#101010"),l:["OWASP Top 10, XSS/CSRF defense","Google OAuth 2.0, JWT","Secure session management"]},
+ {t:"AI-assisted dev",tags:"Copilot · Cursor · Claude",c:g("#7a4cff","#101010"),l:["GitHub Copilot, Cursor, Claude AI / Claude Code","AI context files (.cursorrules, copilot-instructions.md)","Reviewing AI output for security and performance"]},
+ {t:"Tools and platforms",tags:"Git · Vite · Smart TV",c:g("#1f6feb","#101010"),l:["Git, Bitbucket, Webpack, Babel, NPM, Vite, Gulp, Vercel","LG WebOS, Samsung TizenOS, VidaaOS","AWS and Azure (basics)"]}],
+edu:[
+ {t:"MCA",tags:"MGM’s Jawaharlal Nehru Engineering College · 2022",m:"CGPA 8.0/10",c:g("#1f6feb","#08183a"),d:"Master of Computer Applications.",l:["Graduated 2022 with a CGPA of 8.0 out of 10"]},
+ {t:"Learning now",tags:"AI-assisted dev · React · WCAG",m:"In progress",c:g("#0a9d8f","#032420"),d:"Continuous learning.",l:["Responsible use of GitHub Copilot, Cursor, and Claude AI/Claude Code in production codebases","Advanced React.js, Next.js, and TypeScript patterns, micro-frontends, and web accessibility (WCAG 2.1 AA)"]}]
+};
+const $=s=>document.querySelector(s),modal=$("#modal");let n=0;const reg={};
+document.querySelectorAll("[data-row]").forEach(row=>{
+ DATA[row.dataset.row].forEach((it,i)=>{
+  const id="i"+n++;reg[id]=it;
+  const b=document.createElement("button");b.className="card";b.dataset.open=id;b.style.setProperty("--i",i);
+  const p=it.tags.split(" · ");
+  b.innerHTML=`<div class="thumb display" style="background:${it.c}">${it.t}</div><div class="meta"><b>${p[0]}</b>${it.m?`<span class="match">${it.m}</span> · `:""}${p.slice(1).join(" · ")}</div>`;
+  row.appendChild(b);});});
+reg.p0=DATA.projects[0];
+function open(id){const it=reg[id];if(!it)return;
+ $("#m-top").style.background=it.c;$("#m-title").textContent=it.t;$("#m-tags").textContent=it.tags;$("#m-desc").textContent=it.d||"";
+ $("#m-desc").hidden=!it.d;const lk=$("#m-link");lk.hidden=!it.u;if(it.u)lk.href=it.u;$("#m-list").innerHTML=it.l.map(x=>`<li>${x}</li>`).join("");modal.showModal();}
+document.addEventListener("click",e=>{const o=e.target.closest("[data-open]");if(o)open(o.dataset.open);
+ if(e.target.closest(".close")||e.target===modal)modal.close();
+ const p=e.target.closest(".profile");if(p){$("#who").textContent="Viewing as "+p.dataset.who;const pk=$("#picker");pk.classList.add("out");setTimeout(()=>pk.remove(),650);}});
+addEventListener("scroll",()=>$("#nav").classList.toggle("solid",scrollY>40));
+// typewriter
+const roles=["React.js, Vue.js and Next.js developer","Smart TV app builder (WebOS, TizenOS, VidaaOS)","AI-assisted developer: Copilot, Cursor, Claude","Performance and accessibility advocate"];
+const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+(function(){const el=$("#typed");if(still){el.textContent=roles[0];return}
+ let r=0,c=0,del=false;(function tick(){const w=roles[r];el.textContent=w.slice(0,c);
+  if(!del&&c===w.length){del=true;return setTimeout(tick,1600)}
+  if(del&&c===0){del=false;r=(r+1)%roles.length}
+  c+=del?-1:1;setTimeout(tick,del?25:55)})()})();
+// reveal rows and count stats
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);
+ if(e.target.classList.contains("row"))e.target.classList.add("in");
+ else e.target.querySelectorAll("[data-to]").forEach(b=>{const to=+b.dataset.to,s=b.dataset.suf;if(still){b.textContent=to+s;return}
+  const t0=performance.now();(function f(t){const k=Math.min((t-t0)/1400,1);b.textContent=Math.round(to*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(t0)})}),{threshold:.2});
+document.querySelectorAll(".row,.stats").forEach(x=>io.observe(x));
+</script>
+</body>
+</html>
